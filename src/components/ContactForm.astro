@@ -1,0 +1,245 @@
+---
+const regioni = [
+  'Abruzzo', 'Basilicata', 'Calabria', 'Campania', 'Emilia-Romagna',
+  'Friuli Venezia Giulia', 'Lazio', 'Liguria', 'Lombardia', 'Marche',
+  'Molise', 'Piemonte', 'Puglia', 'Sardegna', 'Sicilia',
+  'Toscana', 'Trentino-Alto Adige', 'Umbria', "Valle d'Aosta", 'Veneto',
+];
+
+const funnelOptions = [
+  { value: 'negozio-h24', label: 'Negozio H24', short: 'H24' },
+  { value: 'acquisto-distributore', label: 'Acquisto Distributore', short: 'Acquisto' },
+  { value: 'riparazione-assistenza', label: 'Riparazione e Assistenza', short: 'Assistenza' },
+];
+---
+
+<section id="contatti" class="py-28 md:py-36 relative">
+  <!-- Glow behind form -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
+       style="background: radial-gradient(circle, rgba(245,166,35,0.04) 0%, transparent 70%);"></div>
+
+  <!-- Divider -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent"></div>
+
+  <div class="max-w-2xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-14" data-reveal>
+      <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent/60 mb-4">Contattaci</p>
+      <h2 class="font-display font-bold text-4xl md:text-[3.2rem] leading-[1.05] tracking-tight mb-4">
+        Richiedi<br class="sm:hidden" />
+        <span class="text-accent">informazioni</span>
+      </h2>
+      <p class="text-text-muted text-lg">
+        Compila il form e ti ricontatteremo entro 24 ore
+      </p>
+    </div>
+
+    <form id="contact-form" class="form-card rounded-3xl p-8 md:p-10 space-y-7" data-reveal="delay-1">
+      <!-- Funnel selector tabs -->
+      <div>
+        <label class="block text-[13px] text-text-muted mb-3 font-medium">Perché ci contatti? *</label>
+        <div class="flex flex-wrap gap-2.5">
+          {funnelOptions.map((opt, i) => (
+            <label class="funnel-tab cursor-pointer">
+              <input
+                type="radio"
+                name="funnel"
+                value={opt.value}
+                required
+                checked={i === 0}
+                class="sr-only peer"
+              />
+              <span class="inline-block px-5 py-2.5 rounded-xl text-[13px] font-medium border border-border/60 text-text-muted
+                           peer-checked:bg-accent peer-checked:text-bg peer-checked:border-accent peer-checked:font-semibold
+                           hover:border-accent/30 transition-all duration-300">
+                <span class="hidden sm:inline">{opt.label}</span>
+                <span class="sm:hidden">{opt.short}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <!-- Name row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label for="nome" class="block text-[13px] text-text-muted mb-2 font-medium">Nome *</label>
+          <input
+            id="nome"
+            type="text"
+            name="nome"
+            required
+            placeholder="Il tuo nome"
+            class="form-input"
+          />
+        </div>
+        <div>
+          <label for="cognome" class="block text-[13px] text-text-muted mb-2 font-medium">Cognome *</label>
+          <input
+            id="cognome"
+            type="text"
+            name="cognome"
+            required
+            placeholder="Il tuo cognome"
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <!-- Contact row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label for="email" class="block text-[13px] text-text-muted mb-2 font-medium">Email *</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            required
+            placeholder="email@esempio.it"
+            class="form-input"
+          />
+        </div>
+        <div>
+          <label for="telefono" class="block text-[13px] text-text-muted mb-2 font-medium">
+            Telefono <span class="text-text-muted/40">(facoltativo)</span>
+          </label>
+          <input
+            id="telefono"
+            type="tel"
+            name="telefono"
+            placeholder="+39 ..."
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <!-- Region -->
+      <div>
+        <label for="regione" class="block text-[13px] text-text-muted mb-2 font-medium">Regione *</label>
+        <div class="relative">
+          <select
+            id="regione"
+            name="regione"
+            required
+            class="form-input appearance-none pr-10"
+          >
+            <option value="" disabled selected>Seleziona la tua regione</option>
+            {regioni.map((r) => <option value={r}>{r}</option>)}
+          </select>
+          <svg class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted/50" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="submit-btn w-full py-4 bg-accent text-bg font-body font-bold text-base rounded-xl transition-all duration-400 mt-2 relative overflow-hidden"
+      >
+        <span class="relative z-10" id="submit-text">Invia Richiesta</span>
+      </button>
+
+      <!-- Status -->
+      <div id="form-status" class="text-center text-sm hidden"></div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .form-card {
+    background: linear-gradient(160deg, rgba(17, 17, 24, 0.75), rgba(17, 17, 24, 0.4));
+    border: 1px solid rgba(245, 166, 35, 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid rgba(245, 166, 35, 0.1);
+    border-radius: 0.75rem;
+    color: #F0EFE8;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.938rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+
+  .form-input::placeholder {
+    color: rgba(107, 107, 128, 0.5);
+  }
+
+  .form-input:focus {
+    border-color: rgba(245, 166, 35, 0.4);
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.06);
+  }
+
+  /* Select option styling for dark theme */
+  .form-input option {
+    background: #111118;
+    color: #F0EFE8;
+  }
+
+  .submit-btn {
+    box-shadow: 0 0 0 rgba(245, 166, 35, 0);
+  }
+  .submit-btn:hover {
+    background-color: #FFB940;
+    box-shadow: 0 4px 40px rgba(245, 166, 35, 0.25);
+  }
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .submit-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .submit-btn:hover::before {
+    transform: translateX(100%);
+  }
+</style>
+
+<script>
+  import emailjs from '@emailjs/browser';
+
+  // TODO: Inserire le credenziali EmailJS reali
+  const SERVICE_ID = 'YOUR_SERVICE_ID';
+  const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+
+  emailjs.init(PUBLIC_KEY);
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status') as HTMLDivElement;
+  const submitText = document.getElementById('submit-text') as HTMLSpanElement;
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    submitText.textContent = 'Invio in corso...';
+    submitBtn.disabled = true;
+
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
+
+      status.textContent = 'Richiesta inviata con successo! Ti ricontatteremo presto.';
+      status.className = 'text-center text-sm text-green-400 mt-2';
+      form.reset();
+      // Re-check first funnel option after reset
+      const firstRadio = form.querySelector<HTMLInputElement>('input[name="funnel"]');
+      if (firstRadio) firstRadio.checked = true;
+    } catch {
+      status.textContent = 'Si è verificato un errore. Riprova o contattaci direttamente.';
+      status.className = 'text-center text-sm text-red-400 mt-2';
+    } finally {
+      submitText.textContent = 'Invia Richiesta';
+      submitBtn.disabled = false;
+    }
+  });
+</script>

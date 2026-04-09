@@ -1,0 +1,141 @@
+---
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" id="hero">
+  <!-- Animated pattern: repeating logo motif grid -->
+  <div class="absolute inset-0 pointer-events-none select-none hero-pattern-wrap">
+    <svg class="hero-pattern" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="logoPattern" x="0" y="0" width="120" height="140" patternUnits="userSpaceOnUse">
+          <rect x="10" y="10" width="100" height="120" rx="6" fill="none" stroke="rgba(245,166,35,0.035)" stroke-width="0.8" />
+          <rect x="28" y="28" width="64" height="84" rx="3" fill="none" stroke="rgba(245,166,35,0.025)" stroke-width="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#logoPattern)" />
+    </svg>
+  </div>
+
+  <!-- Animated large rects (focal, center) -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+    <svg class="hero-svg" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect class="rect-outer" x="150" y="100" width="700" height="800" rx="12" />
+      <rect class="rect-mid" x="280" y="230" width="440" height="540" rx="8" />
+      <rect class="rect-inner" x="380" y="340" width="240" height="320" rx="4" />
+    </svg>
+  </div>
+
+  <!-- Vignette overlay: edges dark, center open -->
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 55% at center, transparent 0%, #0A0A0F 100%);"></div>
+
+  <!-- Radial glow behind content -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
+       style="background: radial-gradient(circle, rgba(245,166,35,0.045) 0%, transparent 65%);"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+    <!-- Headline -->
+    <h1 class="font-display font-extrabold text-[clamp(2.8rem,7vw,6.5rem)] leading-[0.92] tracking-tight mb-7 animate-fade-up" style="animation-delay: 0.3s;">
+      Non vendiamo<br />
+      distributori.<br />
+      <span class="hero-accent-text">Costruiamo business.</span>
+    </h1>
+
+    <!-- Description -->
+    <p class="max-w-xl mx-auto text-lg md:text-xl text-text-muted leading-relaxed mb-11 animate-fade-up" style="animation-delay: 0.55s;">
+      Dal singolo distributore al negozio automatico H24 completo.
+      Consulenza, vendita e assistenza tecnica.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay: 0.8s;">
+      <a href="#contatti" class="hero-cta-primary group px-9 py-4 bg-accent text-bg font-body font-bold text-base rounded-xl transition-all duration-400">
+        <span class="flex items-center gap-2">
+          Richiedi Informazioni
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-transform duration-300 group-hover:translate-x-1">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+      <a href="#servizi" class="px-9 py-4 border border-border text-text-muted font-body font-medium text-base rounded-xl hover:border-accent/30 hover:text-text transition-all duration-400">
+        Scopri i servizi
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-float opacity-40">
+    <div class="w-[22px] h-[34px] border-[1.5px] border-text-muted/40 rounded-full flex items-start justify-center pt-2">
+      <div class="w-[3px] h-[6px] bg-accent rounded-full animate-[fade-up_1.8s_ease-in-out_infinite]"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Pattern slow drift */
+  .hero-pattern-wrap {
+    animation: pattern-drift 40s linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes pattern-drift {
+    0%   { transform: translate(0, 0); }
+    50%  { transform: translate(-60px, -70px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  /* Focal rotating rects */
+  .hero-svg {
+    width: min(900px, 85vw);
+    height: min(900px, 85vw);
+  }
+
+  .rect-outer {
+    stroke: rgba(245, 166, 35, 0.04);
+    stroke-width: 1.2;
+    transform-origin: 500px 500px;
+    animation: hero-rect-spin 35s linear infinite;
+  }
+
+  .rect-mid {
+    stroke: rgba(245, 166, 35, 0.06);
+    stroke-width: 0.8;
+    transform-origin: 500px 500px;
+    animation: hero-rect-spin 24s linear infinite reverse;
+  }
+
+  .rect-inner {
+    stroke: rgba(245, 166, 35, 0.03);
+    stroke-width: 0.5;
+    transform-origin: 500px 500px;
+    animation: hero-rect-spin 45s linear infinite;
+  }
+
+  @keyframes hero-rect-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* Headline accent shimmer */
+  .hero-accent-text {
+    background: linear-gradient(135deg, #F5A623 0%, #FFD080 50%, #F5A623 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: text-shimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes text-shimmer {
+    0%, 100% { background-position: 0% center; }
+    50%      { background-position: 200% center; }
+  }
+
+  /* Primary CTA glow */
+  .hero-cta-primary {
+    box-shadow: 0 0 0 rgba(245, 166, 35, 0);
+  }
+  .hero-cta-primary:hover {
+    box-shadow: 0 4px 40px rgba(245, 166, 35, 0.28);
+    background-color: #FFB940;
+  }
+</style>

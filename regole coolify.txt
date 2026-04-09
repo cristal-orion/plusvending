@@ -1,0 +1,19 @@
+regole per deploy su Coolify                                                  
+                                                                 
+  Stack                                                                         
+                                                                                
+  - Astro (static/SSR)                                                          
+  - EmailJS per il form (client-side, zero backend)                             
+                                                                                
+  Regole build                                                                  
+                                                                                
+  - npm run build deve funzionare in locale prima di pushare                    
+  - package-lock.json pulito e committato nel repo
+                                                                                
+  Regole Coolify                                                                
+   
+  - Build pack: Nixpacks (auto-detecta Astro)                                   
+  - Il repo deve essere collegato tramite la GitHub App configurata su Coolify
+  - Nessun Dockerfile necessario                                                
+  - Nessuna variabile d'ambiente necessaria (le chiavi EmailJS sono nel
+  frontend)  

@@ -1,0 +1,153 @@
+---
+const cards = [
+  {
+    value: 'negozio-h24',
+    title: 'Nuovo Negozio H24',
+    description: 'Vuoi aprire un punto vendita automatico? Dalla progettazione all\'allestimento completo, ti seguiamo in ogni fase.',
+    image: '/Lattina.png',
+  },
+  {
+    value: 'acquisto-distributore',
+    title: 'Acquisto Distributore',
+    description: 'Cerchi una macchina nuova o usata? Ti aiutiamo a scegliere il modello più adatto al tuo spazio e al tuo budget.',
+    image: '/Patatine.png',
+  },
+  {
+    value: 'riparazione-assistenza',
+    title: 'Riparazione e Assistenza',
+    description: 'Un guasto o hai bisogno di manutenzione? Interveniamo rapidamente, anche su macchine di altri fornitori.',
+    image: '/bottiglia2.png',
+  },
+];
+---
+
+<section id="servizi" class="py-28 md:py-36 relative">
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-16 md:mb-20" data-reveal>
+      <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent/60 mb-4">I nostri servizi</p>
+      <h2 class="font-display font-bold text-4xl md:text-[3.4rem] leading-[1.05] tracking-tight">
+        Come possiamo<br class="hidden sm:block" />
+        <span class="text-accent">aiutarti?</span>
+      </h2>
+    </div>
+
+    <!-- Desktop: 3 columns | Mobile: 1 column, one at a time -->
+    <div class="flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 items-center md:items-end">
+      {cards.map((card, i) => (
+        <button
+          class="funnel-item group flex flex-col items-center cursor-pointer w-full"
+          data-funnel={card.value}
+        >
+          {/* Product image */}
+          <div class="relative flex items-center justify-center min-h-[55vw] md:min-h-0">
+            <div class="funnel-glow absolute w-48 h-48 md:w-40 md:h-40 rounded-full bg-accent/6 blur-3xl transition-all duration-700 pointer-events-none"></div>
+            <img
+              src={card.image}
+              alt={card.title}
+              width="800"
+              height="800"
+              class="product-img relative z-10 w-[65vw] max-w-[320px] md:w-full md:max-w-[280px] lg:max-w-[320px] h-auto object-contain drop-shadow-[0_15px_40px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Text: hover on desktop, scroll-triggered on mobile */}
+          <div class="funnel-text mt-4 text-center max-w-[300px] px-4">
+            <p class="funnel-desc text-[14px] md:text-sm text-text-muted leading-relaxed opacity-0 translate-y-4 transition-all duration-500 ease-out">
+              {card.description}
+            </p>
+            <span class="funnel-cta inline-flex items-center gap-1 mt-3 text-[13px] font-medium text-accent/80 opacity-0 translate-y-3 transition-all duration-500 ease-out delay-100">
+              Richiedi info →
+            </span>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Base state ─────────────────────── */
+  .product-img {
+    transform: rotate(0deg) translateY(0) scale(1);
+  }
+
+  /* ── Desktop: hover triggers ────────── */
+  @media (hover: hover) {
+    .funnel-item:hover .product-img {
+      transform: rotate(-12deg) translateY(8px) scale(1.05);
+      filter: drop-shadow(0 25px 50px rgba(245, 166, 35, 0.15));
+    }
+    .funnel-item:hover .funnel-glow {
+      background: rgba(245, 166, 35, 0.14);
+    }
+    .funnel-item:hover .funnel-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .funnel-item:hover .funnel-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ── Mobile: scroll-activated state ─── */
+  .funnel-item.active .product-img {
+    transform: rotate(-12deg) translateY(8px) scale(1.05);
+    filter: drop-shadow(0 25px 50px rgba(245, 166, 35, 0.15));
+  }
+  .funnel-item.active .funnel-glow {
+    background: rgba(245, 166, 35, 0.14);
+  }
+  .funnel-item.active .funnel-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .funnel-item.active .funnel-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Click → scroll to form & pre-select funnel
+  document.querySelectorAll<HTMLButtonElement>('[data-funnel]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const value = btn.dataset.funnel;
+      const radio = document.querySelector<HTMLInputElement>(`input[name="funnel"][value="${value}"]`);
+      if (radio) radio.checked = true;
+      document.getElementById('contatti')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Mobile: activate tilt + text when item scrolls into view
+  function initMobileScroll() {
+    if (window.innerWidth >= 768) return;
+
+    const items = document.querySelectorAll<HTMLButtonElement>('.funnel-item');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            entry.target.classList.remove('active');
+          }
+        });
+      },
+      {
+        threshold: 0.4,
+        rootMargin: '-5% 0px -35% 0px',
+      }
+    );
+
+    items.forEach((item) => observer.observe(item));
+  }
+
+  initMobileScroll();
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.funnel-item').forEach(el => el.classList.remove('active'));
+    initMobileScroll();
+  });
+</script>

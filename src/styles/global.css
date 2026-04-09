@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Bricolage Grotesque', serif;
+  --font-body: 'Instrument Sans', sans-serif;
+
+  --color-bg: #0A0A0F;
+  --color-surface: #111118;
+  --color-surface-light: #1A1A24;
+  --color-accent: #F5A623;
+  --color-accent-hover: #FFB940;
+  --color-navy: #1B2A4A;
+  --color-text: #F0EFE8;
+  --color-text-muted: #6B6B80;
+  --color-border: rgba(245, 166, 35, 0.12);
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-float: float 5s ease-in-out infinite;
+}
+
+/* ── Keyframes ───────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ── Scroll-reveal ───────────────────────────── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal="delay-1"] { transition-delay: 0.12s; }
+[data-reveal="delay-2"] { transition-delay: 0.24s; }
+[data-reveal="delay-3"] { transition-delay: 0.36s; }
+[data-reveal="delay-4"] { transition-delay: 0.48s; }
+
+/* ── Base ────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+::selection {
+  background: rgba(245, 166, 35, 0.3);
+  color: #F0EFE8;
+}
+
+/* ── Grain texture overlay ───────────────────── */
+
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ── Custom scrollbar ────────────────────────── */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0A0A0F; }
+::-webkit-scrollbar-thumb { background: rgba(245, 166, 35, 0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(245, 166, 35, 0.45); }

@@ -1,0 +1,111 @@
+---
+const items = [
+  {
+    num: '01',
+    title: 'Soluzioni su misura',
+    description: 'Ti proponiamo solo ciò che serve davvero, senza sprechi di spazio o budget.',
+  },
+  {
+    num: '02',
+    title: 'Esperienza sul campo',
+    description: 'Anni nel vending ci permettono di guidarti in ogni scelta, dalla singola macchina al negozio completo.',
+  },
+  {
+    num: '03',
+    title: 'Tempi rapidi',
+    description: 'Dal preventivo all\'installazione, lavoriamo con velocità e precisione.',
+  },
+  {
+    num: '04',
+    title: 'Un referente unico',
+    description: 'Una persona dedicata a te, sempre disponibile per dubbi, assistenza o modifiche.',
+  },
+];
+---
+
+<section id="perche-noi" class="py-28 md:py-36 relative">
+  <!-- Divider -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent"></div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Title centered -->
+    <div class="text-center mb-16 md:mb-20" data-reveal>
+      <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent/60 mb-4">Perché noi</p>
+      <h2 class="font-display font-bold text-4xl md:text-[3.4rem] leading-[1.05] tracking-tight">
+        Perché scegliere<br class="sm:hidden" />
+        <span class="text-accent">Plus Vending</span>
+      </h2>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+      {items.map((item, i) => (
+        <div
+          class={`why-card group relative overflow-hidden rounded-2xl p-8 md:p-10 transition-all duration-500 ${i === 0 ? 'md:row-span-2' : ''}`}
+          data-reveal={`delay-${i + 1}`}
+        >
+          {/* Giant background number */}
+          <span class="why-num absolute -top-4 -right-2 font-display font-extrabold text-[8rem] md:text-[10rem] leading-none text-accent/[0.04] group-hover:text-accent/[0.09] transition-all duration-700 select-none pointer-events-none">
+            {item.num}
+          </span>
+
+          {/* Accent line */}
+          <div class="why-line w-8 h-[3px] rounded-full bg-accent/30 mb-6 group-hover:w-14 group-hover:bg-accent/70 transition-all duration-500"></div>
+
+          {/* Content */}
+          <div class="relative z-10">
+            <h3 class="font-display font-bold text-xl md:text-2xl mb-3 group-hover:text-accent transition-colors duration-300">
+              {item.title}
+            </h3>
+            <p class="text-text-muted text-[15px] leading-relaxed max-w-sm">
+              {item.description}
+            </p>
+          </div>
+
+          {/* Decorative double rect — only on the tall card */}
+          {i === 0 && (
+            <div class="hidden md:block absolute bottom-8 right-8 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-700">
+              <svg width="100" height="120" viewBox="0 0 40 48" fill="none">
+                <rect x="0" y="0" width="40" height="48" rx="3" stroke="#F5A623" stroke-width="1.2" />
+                <rect x="8" y="8" width="24" height="32" rx="1.5" stroke="#F5A623" stroke-width="0.8" />
+              </svg>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-card {
+    background: linear-gradient(160deg, rgba(17, 17, 24, 0.6), rgba(17, 17, 24, 0.25));
+    border: 1px solid rgba(245, 166, 35, 0.05);
+  }
+
+  .why-card:hover {
+    border-color: rgba(245, 166, 35, 0.15);
+    box-shadow:
+      0 0 40px rgba(245, 166, 35, 0.04),
+      0 20px 60px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px);
+  }
+
+  /* First card (tall): subtle inner glow top-left on hover */
+  .why-card:first-child::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(245, 166, 35, 0.06), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s;
+    pointer-events: none;
+  }
+
+  .why-card:first-child:hover::after {
+    opacity: 1;
+  }
+</style>

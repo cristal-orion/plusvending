@@ -1,0 +1,80 @@
+---
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="main-header">
+  <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 group">
+      <svg
+        width="32"
+        height="38"
+        viewBox="0 0 40 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-transform duration-500 group-hover:scale-110"
+      >
+        <rect x="0" y="0" width="40" height="48" rx="3" fill="#F5A623" />
+        <rect x="6" y="6" width="28" height="36" rx="2" fill="#0A0A0F" class="header-logo-gap" />
+        <rect x="11" y="11" width="18" height="26" rx="1.5" fill="#F5A623" />
+        <rect x="16" y="16" width="8" height="16" rx="1" fill="#0A0A0F" class="header-logo-gap" />
+      </svg>
+      <span class="font-display font-bold text-lg tracking-tight text-text leading-none">
+        PLUS<br /><span class="text-accent">VENDING</span>
+      </span>
+    </a>
+
+    <!-- Nav — desktop -->
+    <nav class="hidden md:flex items-center gap-10">
+      <a href="#servizi" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors duration-300">
+        Servizi
+      </a>
+      <a href="#perche-noi" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors duration-300">
+        Perché noi
+      </a>
+      <a href="#contatti" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors duration-300">
+        Contatti
+      </a>
+    </nav>
+
+    <!-- CTA -->
+    <a
+      href="#contatti"
+      class="cta-btn relative inline-flex items-center gap-2 px-6 py-2.5 bg-accent text-bg font-body font-semibold text-sm rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_32px_rgba(245,166,35,0.3)]"
+    >
+      <span class="relative z-10">Richiedi Info</span>
+    </a>
+  </div>
+</header>
+
+<style>
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .cta-btn:hover::before {
+    transform: translateX(100%);
+  }
+</style>
+
+<script>
+  const header = document.getElementById('main-header');
+  const gaps = document.querySelectorAll('.header-logo-gap');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      header!.style.backgroundColor = 'rgba(10, 10, 15, 0.88)';
+      header!.style.backdropFilter = 'blur(24px)';
+      header!.style.webkitBackdropFilter = 'blur(24px)';
+      header!.style.borderBottom = '1px solid rgba(245, 166, 35, 0.08)';
+    } else {
+      header!.style.backgroundColor = 'transparent';
+      header!.style.backdropFilter = 'none';
+      header!.style.webkitBackdropFilter = 'none';
+      header!.style.borderBottom = '1px solid transparent';
+    }
+  });
+</script>
