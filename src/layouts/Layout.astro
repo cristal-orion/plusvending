@@ -51,6 +51,26 @@ const {
         { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
       );
       document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+
+      // Molding scroll animation — starts narrow, expands to full width
+      const molding = document.getElementById('molding');
+      if (molding) {
+        const content = molding.querySelector('.molding-content') as HTMLElement;
+        const startMargin = 15; // % — initial side margin
+        const startRadius = 50; // px
+        window.addEventListener('scroll', () => {
+          const docH = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = Math.min(1, Math.max(0, window.scrollY / docH));
+          const margin = startMargin * (1 - progress);
+          const radius = startRadius * (1 - progress);
+          molding.style.marginLeft = `${margin}%`;
+          molding.style.marginRight = `${margin}%`;
+          molding.style.borderRadius = `${radius}px ${radius}px 0 0`;
+          if (content) {
+            content.style.borderRadius = `${Math.max(0, radius - 2)}px ${Math.max(0, radius - 2)}px 0 0`;
+          }
+        }, { passive: true });
+      }
     </script>
   </body>
 </html>

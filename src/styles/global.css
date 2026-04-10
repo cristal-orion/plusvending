@@ -90,6 +90,26 @@ html {
   animation: grain-jitter 6s steps(4) infinite;
 }
 
+/* ── Molding / cornice accent ────────────────── */
+
+.molding-wrapper {
+  position: relative;
+  margin: 0 auto;
+  padding: 3px;
+  background: linear-gradient(180deg, var(--color-accent) 0%, rgba(245, 166, 35, 0.3) 100%);
+  border-radius: 50px 50px 0 0;
+  margin-top: -20px;
+  margin-left: 15%;
+  margin-right: 15%;
+  z-index: 20;
+}
+
+.molding-content {
+  background: var(--color-bg);
+  border-radius: 48px 48px 0 0;
+  overflow: hidden;
+}
+
 /* ── Custom scrollbar ────────────────────────── */
 
 ::-webkit-scrollbar { width: 6px; }
