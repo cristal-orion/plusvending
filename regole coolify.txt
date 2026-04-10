@@ -2,34 +2,29 @@ regole per deploy su Coolify
 
   Stack
 
-  - Astro (static/SSR)
+  - Astro (static output)
   - EmailJS per il form (client-side, zero backend)
+  - Nginx come web server per i file statici
 
   Regole build
 
   - npm run build deve funzionare in locale prima di pushare
-  - package-lock.json pulito e committato nel repo
+  - NON committare package-lock.json (il Dockerfile fa npm install fresco
+    per ottenere i binari nativi corretti per Linux)
 
   Regole Coolify
 
-  - Build pack: Nixpacks (auto-detecta Astro)
+  - Build pack: Dockerfile (NON Nixpacks)
   - Il repo deve essere collegato tramite la GitHub App configurata su Coolify
-  - Nessun Dockerfile necessario
-  - Nessuna variabile d'ambiente necessaria (le chiavi EmailJS sono nel
-  frontend)
+  - Il Dockerfile nella root gestisce tutto: build con Node 22 Alpine + serve con Nginx
+  - Porta esposta: 4321
+  - Nessuna variabile d'ambiente necessaria (le chiavi EmailJS sono nel frontend)
 
-  ENV VAR OBBLIGATORIE (problema risolto precedentemente)
+  Note storiche
 
-  Problema 1 — Binding nativo mancante:
-    Astro con Vite 8+ usa rolldown che ha binari platform-specific.
-    Il lockfile generato su macOS/Windows non include @rolldown/binding-linux-x64-gnu.
-    Fix: forzare reinstallazione fresca su Linux.
-
-  Problema 2 — Nessun comando di avvio per output statico:
-    Nixpacks rileva Astro come "node" ma non sa servire i file statici buildati.
-    Fix: usare `npx serve` per servire la cartella dist.
-
-  Le tre env var da impostare SEMPRE su Coolify per questo progetto:
-    NIXPACKS_INSTALL_CMD=rm -rf node_modules package-lock.json && npm install
-    NIXPACKS_START_CMD=npx serve dist -l 4321 -s
-    NIXPACKS_NODE_VERSION=22
+  Nixpacks non funzionava per due motivi:
+  1. Binding nativo mancante — rolldown richiede binari Linux non presenti
+     nel lockfile generato su Windows/macOS
+  2. Nessun start command per output statico — Nixpacks non sa servire
+     i file buildati di Astro
+  Soluzione definitiva: Dockerfile multi-stage (node:22-alpine + nginx:alpine)
