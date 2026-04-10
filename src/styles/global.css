@@ -92,27 +92,33 @@ html {
 
 /* ── Molding / cornice accent ────────────────── */
 
+.molding-outer {
+  background: var(--color-accent);
+  margin-top: -20px;
+  position: relative;
+  z-index: 20;
+}
+
 .molding-wrapper {
   position: relative;
   margin: 0 auto;
   padding: 3px;
-  background: linear-gradient(180deg, var(--color-accent) 0%, rgba(245, 166, 35, 0.3) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 100%);
   border-radius: 50px 50px 0 0;
-  margin-top: -20px;
   margin-left: 15%;
   margin-right: 15%;
-  z-index: 20;
 }
 
 .molding-content {
-  background: var(--color-bg);
+  background: #FAFAF7;
   border-radius: 48px 48px 0 0;
   overflow: hidden;
+  color: #1A1A24;
 }
 
 /* ── Custom scrollbar ────────────────────────── */
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0A0A0F; }
-::-webkit-scrollbar-thumb { background: rgba(245, 166, 35, 0.25); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(245, 166, 35, 0.45); }
+::-webkit-scrollbar-track { background: #FAFAF7; }
+::-webkit-scrollbar-thumb { background: rgba(245, 166, 35, 0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(245, 166, 35, 0.6); }

@@ -16,19 +16,19 @@ const funnelOptions = [
 <section id="contatti" class="py-28 md:py-36 relative">
   <!-- Glow behind form -->
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
-       style="background: radial-gradient(circle, rgba(245,166,35,0.04) 0%, transparent 70%);"></div>
+       style="background: radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 70%);"></div>
 
   <!-- Divider -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-[#ddd] to-transparent"></div>
 
   <div class="max-w-2xl mx-auto px-6 relative z-10">
     <div class="text-center mb-14" data-reveal>
-      <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent/60 mb-4">Contattaci</p>
-      <h2 class="font-display font-bold text-4xl md:text-[3.2rem] leading-[1.05] tracking-tight mb-4">
+      <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent mb-4">Contattaci</p>
+      <h2 class="font-display font-bold text-4xl md:text-[3.2rem] leading-[1.05] tracking-tight mb-4 text-[#1A1A24]">
         Richiedi<br class="sm:hidden" />
         <span class="text-accent">informazioni</span>
       </h2>
-      <p class="text-text-muted text-lg">
+      <p class="text-[#555] text-lg">
         Compila il form e ti ricontatteremo entro 24 ore
       </p>
     </div>
@@ -36,7 +36,7 @@ const funnelOptions = [
     <form id="contact-form" class="form-card rounded-3xl p-8 md:p-10 space-y-7" data-reveal="delay-1">
       <!-- Funnel selector tabs -->
       <div>
-        <label class="block text-[13px] text-text-muted mb-3 font-medium">Perché ci contatti? *</label>
+        <label class="block text-[13px] text-[#555] mb-3 font-medium">Perché ci contatti? *</label>
         <div class="flex flex-wrap gap-2.5">
           {funnelOptions.map((opt, i) => (
             <label class="funnel-tab cursor-pointer">
@@ -48,9 +48,9 @@ const funnelOptions = [
                 checked={i === 0}
                 class="sr-only peer"
               />
-              <span class="inline-block px-5 py-2.5 rounded-xl text-[13px] font-medium border border-border/60 text-text-muted
-                           peer-checked:bg-accent peer-checked:text-bg peer-checked:border-accent peer-checked:font-semibold
-                           hover:border-accent/30 transition-all duration-300">
+              <span class="inline-block px-5 py-2.5 rounded-xl text-[13px] font-medium border border-[#ddd] text-[#555]
+                           peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent peer-checked:font-semibold
+                           hover:border-accent/50 transition-all duration-300">
                 <span class="hidden sm:inline">{opt.label}</span>
                 <span class="sm:hidden">{opt.short}</span>
               </span>
@@ -62,7 +62,7 @@ const funnelOptions = [
       <!-- Name row -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label for="nome" class="block text-[13px] text-text-muted mb-2 font-medium">Nome *</label>
+          <label for="nome" class="block text-[13px] text-[#555] mb-2 font-medium">Nome *</label>
           <input
             id="nome"
             type="text"
@@ -73,7 +73,7 @@ const funnelOptions = [
           />
         </div>
         <div>
-          <label for="cognome" class="block text-[13px] text-text-muted mb-2 font-medium">Cognome *</label>
+          <label for="cognome" class="block text-[13px] text-[#555] mb-2 font-medium">Cognome *</label>
           <input
             id="cognome"
             type="text"
@@ -88,7 +88,7 @@ const funnelOptions = [
       <!-- Contact row -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label for="email" class="block text-[13px] text-text-muted mb-2 font-medium">Email *</label>
+          <label for="email" class="block text-[13px] text-[#555] mb-2 font-medium">Email *</label>
           <input
             id="email"
             type="email"
@@ -99,8 +99,8 @@ const funnelOptions = [
           />
         </div>
         <div>
-          <label for="telefono" class="block text-[13px] text-text-muted mb-2 font-medium">
-            Telefono <span class="text-text-muted/40">(facoltativo)</span>
+          <label for="telefono" class="block text-[13px] text-[#555] mb-2 font-medium">
+            Telefono <span class="text-[#999]">(facoltativo)</span>
           </label>
           <input
             id="telefono"
@@ -114,7 +114,7 @@ const funnelOptions = [
 
       <!-- Region -->
       <div>
-        <label for="regione" class="block text-[13px] text-text-muted mb-2 font-medium">Regione *</label>
+        <label for="regione" class="block text-[13px] text-[#555] mb-2 font-medium">Regione *</label>
         <div class="relative">
           <select
             id="regione"
@@ -134,7 +134,7 @@ const funnelOptions = [
       <!-- Submit -->
       <button
         type="submit"
-        class="submit-btn w-full py-4 bg-accent text-bg font-body font-bold text-base rounded-xl transition-all duration-400 mt-2 relative overflow-hidden"
+        class="submit-btn w-full py-4 bg-accent text-white font-body font-bold text-base rounded-xl transition-all duration-400 mt-2 relative overflow-hidden"
       >
         <span class="relative z-10" id="submit-text">Invia Richiesta</span>
       </button>
@@ -147,18 +147,18 @@ const funnelOptions = [
 
 <style>
   .form-card {
-    background: linear-gradient(160deg, rgba(17, 17, 24, 0.75), rgba(17, 17, 24, 0.4));
-    border: 1px solid rgba(245, 166, 35, 0.08);
-    backdrop-filter: blur(16px);
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   }
 
   .form-input {
     width: 100%;
     padding: 0.8rem 1rem;
-    background: rgba(10, 10, 15, 0.6);
-    border: 1px solid rgba(245, 166, 35, 0.1);
+    background: #F5F5F2;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 0.75rem;
-    color: #F0EFE8;
+    color: #1A1A24;
     font-family: 'Instrument Sans', sans-serif;
     font-size: 0.938rem;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -166,18 +166,17 @@ const funnelOptions = [
   }
 
   .form-input::placeholder {
-    color: rgba(107, 107, 128, 0.5);
+    color: #999;
   }
 
   .form-input:focus {
-    border-color: rgba(245, 166, 35, 0.4);
-    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.06);
+    border-color: rgba(245, 166, 35, 0.5);
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
   }
 
-  /* Select option styling for dark theme */
   .form-input option {
-    background: #111118;
-    color: #F0EFE8;
+    background: #FFFFFF;
+    color: #1A1A24;
   }
 
   .submit-btn {

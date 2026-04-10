@@ -1,0 +1,120 @@
+---
+const stats = [
+  { value: '18+', label: 'Anni di esperienza' },
+  { value: '235+', label: 'Distributori installati' },
+  { value: '130+', label: 'Aziende servite ogni anno' },
+  { value: '98%', label: 'Clienti soddisfatti' },
+];
+
+const values = [
+  {
+    icon: 'shield',
+    title: 'Affidabilità',
+    desc: 'Ogni macchina venduta o installata è seguita dal nostro team tecnico interno.',
+  },
+  {
+    icon: 'handshake',
+    title: 'Fiducia',
+    desc: 'Costruire relazioni durature è più importante di chiudere una vendita.',
+  },
+  {
+    icon: 'zap',
+    title: 'Impegno',
+    desc: 'Ogni installazione riceve la stessa dedizione, dalla singola macchina al negozio completo.',
+  },
+  {
+    icon: 'lightbulb',
+    title: 'Innovazione',
+    desc: 'Selezioniamo solo distributori efficienti e tecnologicamente avanzati.',
+  },
+];
+---
+
+<section id="chi-siamo" class="py-28 md:py-36 relative">
+  <!-- Divider -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-[#ddd] to-transparent"></div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-16 md:mb-20" data-reveal>
+      <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent mb-4">Chi siamo</p>
+      <h2 class="font-display font-bold text-4xl md:text-[3.4rem] leading-[1.05] tracking-tight text-[#1A1A24]">
+        La storia di<br class="sm:hidden" />
+        <span class="text-accent">Plus Vending</span>
+      </h2>
+    </div>
+
+    <!-- Story block -->
+    <div class="max-w-3xl mx-auto text-center mb-20" data-reveal="delay-1">
+      <p class="text-[17px] md:text-lg leading-relaxed text-[#444]">
+        Plus Vending nasce dall'esperienza di <strong class="text-[#1A1A24]">Antonio D'Ambrosio</strong>, oltre 16 anni come tecnico nel settore vending prima di fondare una realtà tutta sua. L'obiettivo? Offrire ai clienti un servizio che metta al centro <strong class="text-[#1A1A24]">fiducia, rispetto e qualità del lavoro</strong>. Oggi siamo una realtà consolidata a livello campano nella vendita, riparazione e allestimento di negozi automatici H24.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20">
+      {stats.map((stat, i) => (
+        <div class="about-stat text-center p-6 md:p-8 rounded-2xl" data-reveal={`delay-${i + 1}`}>
+          <span class="block font-display font-extrabold text-4xl md:text-5xl text-accent leading-none mb-2">{stat.value}</span>
+          <span class="text-[13px] md:text-sm text-[#666] font-medium">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Values grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+      {values.map((val, i) => (
+        <div class="about-value group flex gap-5 p-7 md:p-8 rounded-2xl transition-all duration-500" data-reveal={`delay-${i + 1}`}>
+          <div class="about-icon shrink-0 w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center transition-colors duration-300 group-hover:bg-accent/20">
+            {val.icon === 'shield' && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            )}
+            {val.icon === 'handshake' && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/>
+              </svg>
+            )}
+            {val.icon === 'zap' && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            )}
+            {val.icon === 'lightbulb' && (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+              </svg>
+            )}
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-[#1A1A24] mb-1 group-hover:text-accent transition-colors duration-300">{val.title}</h3>
+            <p class="text-[14px] text-[#555] leading-relaxed">{val.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-stat {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .about-value {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .about-value:hover {
+    border-color: rgba(245, 166, 35, 0.3);
+    box-shadow:
+      0 0 40px rgba(245, 166, 35, 0.06),
+      0 10px 40px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+</style>
