@@ -21,7 +21,38 @@ const {
     <title>{title}</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://plusvending.it" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://plusvending.it" />
+    <meta property="og:image" content="https://plusvending.it/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Plus Vending",
+        "description": "Vendita, riparazione distributori automatici e progettazione negozi H24 in Campania.",
+        "url": "https://plusvending.it",
+        "telephone": "+390810000000",
+        "email": "info@plusvending.it",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Napoli",
+          "addressRegion": "Campania",
+          "addressCountry": "IT"
+        },
+        "areaServed": {
+          "@type": "State",
+          "name": "Campania"
+        },
+        "priceRange": "€€"
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap"

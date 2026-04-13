@@ -1,0 +1,24 @@
+# Plus Vending - AI Knowledge Base
+
+## Overview
+Plus Vending offre vendita, riparazione e assistenza distributori automatici in Campania. Servizi H24 per negozi, uffici e attività commerciali.
+
+## Services
+- Vendita distributori automatici
+- Riparazione e manutenzione
+- Progettazione negozi H24
+- Consulenza tecnica
+- Assistenza 24/7
+
+## Location
+Napoli, Campania, Italia
+
+## Contact
+- Telefono: +390810000000
+- Email: info@plusvending.it
+- Servizio: Campania
+
+## Business Info
+- Tipo: LocalBusiness, VendingMachineBusiness
+- Area servita: Campania
+- Fascia prezzo: €€
