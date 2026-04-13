@@ -1,13 +1,13 @@
 ---
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" id="hero">
-  <!-- Background image -->
+<section class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden pt-20" id="hero">
+  <!-- Background image with darkening -->
   <div class="absolute inset-0">
-    <img src="/heroimg.png" alt="" class="w-full h-full object-cover object-center" />
+    <img src="/heroimg.png" alt="" class="w-full h-full object-cover object-center brightness-[0.55]" />
   </div>
 
-  <!-- Grain overlay on hero image -->
+  <!-- Grain overlay — vintage look -->
   <div class="hero-grain absolute inset-0 pointer-events-none"></div>
 
   <!-- Content -->
@@ -51,13 +51,18 @@
 </section>
 
 <style>
-  /* Grain texture over hero image */
+  /* Rounded bottom corners */
+  .hero-section {
+    border-radius: 0 0 48px 48px;
+  }
+
+  /* Grain texture over hero image — vintage feel */
   .hero-grain {
     z-index: 1;
-    opacity: 0.12;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.22;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-repeat: repeat;
-    background-size: 200px 200px;
+    background-size: 180px 180px;
     mix-blend-mode: overlay;
   }
 
@@ -77,20 +82,13 @@
   /* Gold text — drop-shadow version (text-shadow doesn't work with background-clip) */
   .hero-accent-text {
     background: linear-gradient(135deg, #F5A623 0%, #FFD080 50%, #F5A623 100%);
-    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: text-shimmer 4s ease-in-out infinite;
     filter:
       drop-shadow(0 2px 3px rgba(0, 0, 0, 0.85))
       drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6))
       drop-shadow(0 8px 32px rgba(0, 0, 0, 0.4));
-  }
-
-  @keyframes text-shimmer {
-    0%, 100% { background-position: 0% center; }
-    50%      { background-position: 200% center; }
   }
 
   /* Subtitle shadow — lighter touch */

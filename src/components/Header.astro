@@ -25,16 +25,16 @@
 
     <!-- Nav — desktop -->
     <nav class="hidden md:flex items-center gap-10">
-      <a href="#servizi" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors duration-300">
+      <a href="#servizi" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-white/80 hover:text-accent transition-colors duration-300">
         Servizi
       </a>
-      <a href="#perche-noi" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors duration-300">
+      <a href="#perche-noi" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-white/80 hover:text-accent transition-colors duration-300">
         Perché noi
       </a>
-      <a href="#chi-siamo" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors duration-300">
+      <a href="#chi-siamo" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-white/80 hover:text-accent transition-colors duration-300">
         Chi siamo
       </a>
-      <a href="#contatti" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors duration-300">
+      <a href="#contatti" class="nav-link text-[13px] font-medium uppercase tracking-[0.15em] text-white/80 hover:text-accent transition-colors duration-300">
         Contatti
       </a>
     </nav>
@@ -62,6 +62,11 @@
     transform: translateX(100%);
   }
 
+  /* Scrolled over dark area (hero) — keep text bright */
+  :global(.header-scrolled):not(:global(.header-light)) .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
   /* Light mode header when over content area */
   :global(.header-light) .nav-link {
     color: #555;
@@ -87,6 +92,7 @@
     const overLight = moldingOuter && window.scrollY >= moldingOuter.offsetTop - 80;
 
     if (window.scrollY > 60) {
+      header!.classList.add('header-scrolled');
       if (overLight) {
         header!.style.backgroundColor = 'rgba(250, 250, 247, 0.92)';
         header!.classList.add('header-light');
@@ -103,6 +109,7 @@
       header!.style.webkitBackdropFilter = 'none';
       header!.style.borderBottom = '1px solid transparent';
       header!.classList.remove('header-light');
+      header!.classList.remove('header-scrolled');
     }
   });
 </script>

@@ -1,0 +1,124 @@
+---
+const reviews = [
+  {
+    name: 'Raffaele Esposito',
+    rating: 5,
+    text: 'Ho acquistato i distributori automatici di bibite da Antonio e posso dire che è stata un\'ottima scelta. Antonio è una persona estremamente competente e disponibile: mi ha seguito passo dopo passo nella scelta del modello più adatto alle mie esigenze, offrendo consigli professionali e un servizio impeccabile.',
+  },
+  {
+    name: 'Marco Sorrentino',
+    rating: 5,
+    text: 'Personale altamente qualificato e sempre disponibile per ogni intervento. Il titolare Antonio una persona squisita e gentile. Per i nostri prossimi negozi ci affideremo sempre alla Plus Vending.',
+  },
+  {
+    name: 'Nicola De Rosa',
+    rating: 5,
+    text: 'La Plusvending è capitanata dal leader Antonio che è una persona disponibile e affidabile e poi c\'è un team di collaboratori sempre pronti e preparati per ogni esigenza. Azienda nel settore Vending che straconsiglio.',
+  },
+  {
+    name: 'Ciro Damasco',
+    rating: 5,
+    text: 'Antonio molto scrupoloso nel suo lavoro, con attenzione massima per il cliente. Precisione, affidabilità, serietà: uno dei pochi rivenditori seri.',
+  },
+  {
+    name: 'Emanuele D\'Ambrosio',
+    rating: 5,
+    text: 'Azienda seria ed affidabile. Ottimo servizio, preciso e puntuale.',
+  },
+  {
+    name: 'Osvaldo',
+    rating: 5,
+    text: 'Azienda seria e affidabile, il sig. Antonio persona gentile e sempre disponibile.',
+  },
+];
+---
+
+<section id="dicono-di-noi" class="py-28 md:py-36 relative">
+  <!-- Divider -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-[#ddd] to-transparent"></div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-16 md:mb-20" data-reveal>
+      <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent mb-4">Dicono di noi</p>
+      <h2 class="font-display font-bold text-4xl md:text-[3.4rem] leading-[1.05] tracking-tight text-[#1A1A24]">
+        La voce dei nostri<br class="sm:hidden" />
+        <span class="text-accent">clienti</span>
+      </h2>
+      <div class="flex items-center justify-center gap-2 mt-6">
+        <div class="flex gap-0.5">
+          {Array.from({ length: 5 }).map(() => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#F5A623" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          ))}
+        </div>
+        <span class="text-sm text-[#666] font-medium ml-1">5.0 su Google — 18 recensioni</span>
+      </div>
+    </div>
+
+    <!-- Reviews grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      {reviews.map((review, i) => (
+        <div
+          class="review-card group relative overflow-hidden rounded-2xl p-7 md:p-8 transition-all duration-500"
+          data-reveal={`delay-${(i % 3) + 1}`}
+        >
+          {/* Quote icon */}
+          <svg class="absolute top-6 right-6 w-8 h-8 text-accent/[0.1] group-hover:text-accent/[0.2] transition-colors duration-500" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+
+          {/* Stars */}
+          <div class="flex gap-0.5 mb-4">
+            {Array.from({ length: review.rating }).map(() => (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#F5A623" stroke="none">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            ))}
+          </div>
+
+          {/* Text */}
+          <p class="text-[14px] md:text-[15px] text-[#444] leading-relaxed mb-6 relative z-10">
+            "{review.text}"
+          </p>
+
+          {/* Author */}
+          <div class="flex items-center gap-3 relative z-10">
+            <div class="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center">
+              <span class="font-display font-bold text-sm text-accent">{review.name.charAt(0)}</span>
+            </div>
+            <div>
+              <p class="font-display font-semibold text-sm text-[#1A1A24]">{review.name}</p>
+              <div class="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                <span class="text-[11px] text-[#888]">Google</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .review-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .review-card:hover {
+    border-color: rgba(245, 166, 35, 0.3);
+    box-shadow:
+      0 0 40px rgba(245, 166, 35, 0.06),
+      0 10px 40px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+</style>
