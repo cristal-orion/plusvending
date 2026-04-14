@@ -16,7 +16,7 @@ const cards = [
     value: 'riparazione-assistenza',
     title: 'Riparazione e Assistenza',
     description: 'Un guasto o hai bisogno di manutenzione? Interveniamo rapidamente, anche su macchine di altri fornitori.',
-    image: '/bottiglia2.png',
+    image: '/cupcoffee.png',
   },
 ];
 ---
@@ -46,7 +46,7 @@ const cards = [
               alt={card.title}
               width="800"
               height="800"
-              class="product-img relative z-10 w-[65vw] max-w-[320px] md:w-full md:max-w-[280px] lg:max-w-[320px] h-auto object-contain drop-shadow-[0_15px_40px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out"
+              class={`product-img relative z-10 w-[65vw] max-w-[320px] md:w-full md:max-w-[280px] lg:max-w-[320px] h-auto object-contain drop-shadow-[0_15px_40px_rgba(0,0,0,0.15)] transition-all duration-500 ease-out${i === 2 ? ' scale-[1.5] -translate-y-6' : ''}`}
               loading="lazy"
             />
           </div>

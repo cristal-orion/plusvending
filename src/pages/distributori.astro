@@ -9,7 +9,7 @@ const categorie = [
     id: 'snack-bevande',
     tag: 'Snack & Bevande',
     title: 'Distributori Snack e Bevande',
-    image: '/snackebevande.jpg',
+    image: '/snackebevande.png',
     description: 'Distributori automatici per snack confezionati, bevande fredde e acqua. Ideali per uffici, aree comuni, palestre e spazi pubblici ad alto traffico. Disponibili in diverse configurazioni con sistemi refrigerati e display interattivi.',
     features: ['Refrigerazione regolabile', 'Display touch interattivo', 'Caricamento frontale o posteriore', 'Compatibilità sistemi cashless'],
     accent: 'from-amber-500/20 to-orange-600/20',
@@ -18,7 +18,7 @@ const categorie = [
     id: 'caffe',
     tag: 'Caffè',
     title: 'Distributori Caffè',
-    image: '/caffe.webp',
+    image: '/caffèespresso.png',
     description: 'Il caffè è il cuore del vending. Proponiamo macchine di ultima generazione come il G-Caffè UNI-Q Touch, dotato di display touch da 18,5 pollici con interfaccia accessibile. Collegabile a distributori Slave per offrire una gamma completa di snack abbinati alle bevande calde.',
     features: ['Display touch 18.5" con UI accessibile', 'Visualizzazione valori nutrizionali', 'Configurazione Master-Slave', 'Layout grafici personalizzabili'],
     accent: 'from-amber-700/20 to-yellow-900/20',
@@ -27,7 +27,7 @@ const categorie = [
     id: 'carne-frozen',
     tag: 'Carne & Frozen',
     title: 'Distributori Carne e Frozen',
-    image: '/carne.jpg',
+    image: '/frozen.png',
     description: 'Il modello SBX-H2 Back Loader Master 10 è progettato per la vendita di carne fresca e prodotti surgelati. Il sistema di caricamento posteriore consente di rifornire senza alterare la catena del freddo, mantenendo temperature tra +2°C e +10°C. Adattabile anche a farmacie e panetterie.',
     features: ['Back-loading senza interruzione catena del freddo', 'Fino a 60 selezioni su 4-6 ripiani', 'Controllo elettronico refrigerante HC2', 'Protocollo Executive/MDB'],
     accent: 'from-sky-500/20 to-cyan-600/20',
@@ -36,7 +36,7 @@ const categorie = [
     id: 'gelati',
     tag: 'Gelati',
     title: 'Distributori Gelati',
-    image: '/gelati1.webp',
+    image: '/gelati.png',
     description: 'Distributori automatici con sistema di refrigerazione avanzato, progettati per mantenere la temperatura ideale di conservazione del gelato. Perfetti per località turistiche, stabilimenti balneari, centri commerciali e negozi automatici H24.',
     features: ['Refrigerazione a temperatura negativa', 'Vetrina illuminata per visibilità prodotto', 'Sistema anti-sbrinamento', 'Ideale per alto traffico stagionale'],
     accent: 'from-pink-400/20 to-fuchsia-500/20',
@@ -45,7 +45,7 @@ const categorie = [
     id: 'giochi',
     tag: 'Giochi',
     title: 'Distributori Giochi e Intrattenimento',
-    image: '/giochi.jpg',
+    image: '/giochi.png',
     description: 'Distributori automatici dedicati a giocattoli, peluche e gadget. Soluzioni ad alta attrattiva visiva, perfette per centri commerciali, sale giochi, aree dedicate ai bambini e negozi automatici. Disponibili in diverse configurazioni con sistemi a gru o a selezione diretta.',
     features: ['Alta attrattiva visuale con illuminazione LED', 'Sistemi a gru o selezione diretta', 'Struttura robusta e antivandalismo', 'Personalizzazione grafica completa'],
     accent: 'from-violet-500/20 to-purple-600/20',
@@ -121,15 +121,12 @@ const categorie = [
 
                   {/* Image */}
                   <div class="dist-img-wrap w-full lg:w-1/2" data-reveal>
-                    <div class="relative aspect-[4/3] rounded-3xl overflow-hidden border border-black/[0.04] shadow-lg">
-                      <img
-                        src={cat.image}
-                        alt={cat.title}
-                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                        loading="lazy"
-                      />
-                      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-                    </div>
+                    <img
+                      src={cat.image}
+                      alt={cat.title}
+                      class="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.12)] transition-transform duration-700 hover:scale-105"
+                      loading="lazy"
+                    />
                   </div>
 
                   {/* Text content */}
