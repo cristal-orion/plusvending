@@ -153,6 +153,51 @@ const photos = [
             </div>
           </section>
 
+          <!-- ── PARTNER STRIP ── -->
+          <section class="relative py-20 overflow-hidden">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-[#ddd] to-transparent"></div>
+
+            <div class="text-center mb-12" data-reveal>
+              <p class="text-[11px] font-body font-semibold tracking-[0.22em] uppercase text-accent mb-3">Con chi lavoriamo</p>
+              <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-[1.1] tracking-tight text-[#1A1A24]">
+                I nostri <span class="text-accent">partner</span>
+              </h2>
+            </div>
+
+            <!-- Strip infinita -->
+            <div class="partner-track-wrap">
+              <!-- Fade edges -->
+              <div class="partner-fade-left"></div>
+              <div class="partner-fade-right"></div>
+
+              <div class="partner-track">
+                {[
+                  { src: '/partner/tcn-1.png',        alt: 'TCN' },
+                  { src: '/partner/ziwi.jpg',          alt: 'Zilli' },
+                  { src: '/partner/logomarkitaly.png', alt: 'Mark Italy' },
+                  { src: '/partner/Nayax.png',         alt: 'Nayax' },
+                  { src: '/partner/CPI.png',           alt: 'CPI' },
+                  { src: '/partner/LOGO-NECTA.png',    alt: 'Necta' },
+                  { src: '/partner/fas.png',           alt: 'FAS' },
+                  { src: '/partner/sandevendo.png',    alt: 'Sandevendo' },
+                  /* duplicate for seamless loop */
+                  { src: '/partner/tcn-1.png',        alt: 'TCN' },
+                  { src: '/partner/ziwi.jpg',          alt: 'Zilli' },
+                  { src: '/partner/logomarkitaly.png', alt: 'Mark Italy' },
+                  { src: '/partner/Nayax.png',         alt: 'Nayax' },
+                  { src: '/partner/CPI.png',           alt: 'CPI' },
+                  { src: '/partner/LOGO-NECTA.png',    alt: 'Necta' },
+                  { src: '/partner/fas.png',           alt: 'FAS' },
+                  { src: '/partner/sandevendo.png',    alt: 'Sandevendo' },
+                ].map((p) => (
+                  <div class="partner-item">
+                    <img src={p.src} alt={p.alt} loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           <!-- ── CTA BOTTOM ── -->
           <section class="relative py-24 overflow-hidden">
             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[min(80%,600px)] h-px bg-gradient-to-r from-transparent via-[#ddd] to-transparent"></div>
@@ -487,6 +532,63 @@ const photos = [
 
   .lb-prev { left: 20px; }
   .lb-next { right: 20px; }
+
+  /* ── Partner strip ── */
+  .partner-track-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .partner-fade-left,
+  .partner-fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .partner-fade-left  { left: 0;  background: linear-gradient(to right, #FAFAF7, transparent); }
+  .partner-fade-right { right: 0; background: linear-gradient(to left,  #FAFAF7, transparent); }
+
+  .partner-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: max-content;
+    animation: scroll-left 28s linear infinite;
+  }
+
+  .partner-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .partner-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 48px;
+    height: 72px;
+    flex-shrink: 0;
+  }
+
+  .partner-item img {
+    height: 40px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.5);
+    transition: filter 0.3s ease;
+  }
+
+  .partner-item img:hover {
+    filter: grayscale(0) opacity(1);
+  }
 
   /* ── CTA shine ── */
   .cta-shine {
