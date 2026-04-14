@@ -19,8 +19,10 @@ RUN printf 'server {\n\
     index index.html;\n\
 \n\
     location / {\n\
-        try_files $uri $uri/ $uri/index.html =404;\n\
+        try_files $uri $uri/ =404;\n\
     }\n\
+\n\
+    error_page 404 /index.html;\n\
 \n\
     gzip on;\n\
     gzip_types text/plain text/css application/json application/javascript text/xml image/svg+xml;\n\
