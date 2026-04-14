@@ -19,7 +19,7 @@ RUN printf 'server {\n\
     index index.html;\n\
 \n\
     location / {\n\
-        try_files $uri $uri/ /index.html;\n\
+        try_files $uri $uri/ $uri/index.html =404;\n\
     }\n\
 \n\
     gzip on;\n\
