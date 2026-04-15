@@ -27,7 +27,7 @@ function FrostPill({
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url(/heroimg-blur.png)",
+          backgroundImage: "url(/heroimg-blur.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -73,7 +73,7 @@ export default function HeroReact() {
       {/* Background image */}
       <div className="absolute inset-0">
         <img
-          src="/heroimg.png"
+          src="/heroimg.webp"
           alt=""
           className="w-full h-full object-cover object-center"
         />
