@@ -72,7 +72,7 @@
 
 <!-- Mobile nav overlay — outside header to avoid z-index stacking issues -->
 <div id="mobile-menu" class="mobile-menu md:hidden fixed inset-0 z-[100] pointer-events-none opacity-0 transition-opacity duration-300">
-  <div class="absolute inset-0 bg-bg/95 backdrop-blur-xl"></div>
+  <div id="mobile-backdrop" class="absolute inset-0 bg-bg/95 backdrop-blur-xl"></div>
   <nav class="relative z-10 flex flex-col items-center justify-center h-full gap-10">
     <a href="/#servizi" class="mobile-nav-link text-2xl font-medium uppercase tracking-[0.2em] text-white/80 hover:text-accent transition-colors duration-300">
       Servizi
@@ -163,22 +163,39 @@
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
 
+  function openMenu() {
+    mobileMenu!.classList.add('is-open');
+    menuToggle!.classList.add('menu-open');
+    menuToggle!.setAttribute('aria-expanded', 'true');
+    header!.style.zIndex = '150';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu!.classList.remove('is-open');
+    menuToggle!.classList.remove('menu-open');
+    menuToggle!.setAttribute('aria-expanded', 'false');
+    header!.style.zIndex = '';
+    document.body.style.overflow = '';
+  }
+
   // Mobile menu toggle
   menuToggle?.addEventListener('click', () => {
-    const isOpen = mobileMenu!.classList.toggle('is-open');
-    menuToggle.classList.toggle('menu-open', isOpen);
-    menuToggle.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    const isOpen = mobileMenu!.classList.contains('is-open');
+    isOpen ? closeMenu() : openMenu();
   });
 
   // Close menu on link click
   mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('is-open');
-      menuToggle!.classList.remove('menu-open');
-      menuToggle!.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close menu on backdrop tap (anywhere that's not a link)
+  mobileMenu?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('a')) {
+      closeMenu();
+    }
   });
 
   const moldingOuter = document.querySelector('.molding-outer') as HTMLElement;
