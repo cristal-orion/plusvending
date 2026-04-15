@@ -45,13 +45,52 @@
       </a>
     </nav>
 
-    <!-- CTA -->
-    <a
-      href="/#contatti"
-      class="cta-btn relative inline-flex items-center gap-2 px-6 py-2.5 bg-accent text-bg font-body font-semibold text-sm rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_32px_rgba(245,166,35,0.3)]"
-    >
-      <span class="relative z-10">Richiedi Info</span>
-    </a>
+    <div class="flex items-center gap-4">
+      <!-- CTA -->
+      <a
+        href="/#contatti"
+        class="cta-btn relative inline-flex items-center gap-2 px-6 py-2.5 bg-accent text-bg font-body font-semibold text-sm rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_32px_rgba(245,166,35,0.3)]"
+      >
+        <span class="relative z-10">Richiedi Info</span>
+      </a>
+
+      <!-- Hamburger — mobile only -->
+      <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px] group"
+        aria-label="Apri menu"
+        aria-expanded="false"
+      >
+        <span class="hamburger-line block w-6 h-[2px] bg-white rounded-full transition-all duration-300 origin-center"></span>
+        <span class="hamburger-line block w-6 h-[2px] bg-white rounded-full transition-all duration-300 origin-center"></span>
+        <span class="hamburger-line block w-6 h-[2px] bg-white rounded-full transition-all duration-300 origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav overlay -->
+  <div id="mobile-menu" class="mobile-menu md:hidden fixed inset-0 top-0 z-40 pointer-events-none opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-bg/95 backdrop-blur-xl"></div>
+    <nav class="relative z-10 flex flex-col items-center justify-center h-full gap-8">
+      <a href="/#servizi" class="mobile-nav-link text-xl font-medium uppercase tracking-[0.2em] text-white/80 hover:text-accent transition-colors duration-300">
+        Servizi
+      </a>
+      <a href="/distributori" class="mobile-nav-link text-xl font-medium uppercase tracking-[0.2em] text-white/80 hover:text-accent transition-colors duration-300">
+        Distributori
+      </a>
+      <a href="/negozi-h24" class="mobile-nav-link text-xl font-medium uppercase tracking-[0.2em] text-white/80 hover:text-accent transition-colors duration-300">
+        Negozi H24
+      </a>
+      <a href="/#perche-noi" class="mobile-nav-link text-xl font-medium uppercase tracking-[0.2em] text-white/80 hover:text-accent transition-colors duration-300">
+        Perché noi
+      </a>
+      <a href="/#chi-siamo" class="mobile-nav-link text-xl font-medium uppercase tracking-[0.2em] text-white/80 hover:text-accent transition-colors duration-300">
+        Chi siamo
+      </a>
+      <a href="/#contatti" class="mobile-nav-link text-xl font-medium uppercase tracking-[0.2em] text-white/80 hover:text-accent transition-colors duration-300">
+        Contatti
+      </a>
+    </nav>
   </div>
 </header>
 
@@ -66,6 +105,28 @@
   }
   .cta-btn:hover::before {
     transform: translateX(100%);
+  }
+
+  /* Hamburger → X animation */
+  .menu-open .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-open .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Light header hamburger lines */
+  :global(.header-light) .hamburger-line {
+    background-color: #1A1A24;
+  }
+
+  /* Mobile menu open state */
+  .mobile-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   /* Scrolled over dark area (hero) — keep text bright */
@@ -91,6 +152,26 @@
 <script>
   const header = document.getElementById('main-header');
   const gaps = document.querySelectorAll('.header-logo-gap');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Mobile menu toggle
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = mobileMenu!.classList.toggle('is-open');
+    menuToggle.classList.toggle('menu-open', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close menu on link click
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('is-open');
+      menuToggle!.classList.remove('menu-open');
+      menuToggle!.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
 
   const moldingOuter = document.querySelector('.molding-outer') as HTMLElement;
 
