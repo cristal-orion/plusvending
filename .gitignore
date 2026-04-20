@@ -8,3 +8,6 @@ npm-debug.log*
 .idea/
 .nixpacks/
 .astro/
+
+# Cartelle locali per asset da processare (gli output vanno in public/)
+fotonuove/
