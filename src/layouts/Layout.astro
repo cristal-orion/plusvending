@@ -1,4 +1,6 @@
 ---
+import CookieBanner from '../components/CookieBanner.astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -13,6 +15,36 @@ const {
 <!DOCTYPE html>
 <html lang="it">
   <head>
+    <!-- Google Consent Mode v2 — default denied, updated by CookieBanner -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+
+      // Honor stored preferences if the user already chose
+      var stored = null;
+      try { stored = JSON.parse(localStorage.getItem('pv_consent_v1')); } catch(e) {}
+
+      var defaults = {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+      };
+
+      if (stored && stored.choices) {
+        defaults.analytics_storage = stored.choices.statistics ? 'granted' : 'denied';
+        defaults.ad_storage = stored.choices.marketing ? 'granted' : 'denied';
+        defaults.ad_user_data = stored.choices.marketing ? 'granted' : 'denied';
+        defaults.ad_personalization = stored.choices.marketing ? 'granted' : 'denied';
+      }
+
+      gtag('consent', 'default', defaults);
+    </script>
+
     <!-- Google Tag Manager -->
     <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -80,6 +112,8 @@ const {
     </div>
     
     <slot />
+
+    <CookieBanner />
 
     <script>
       const observer = new IntersectionObserver(
