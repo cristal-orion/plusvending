@@ -4,21 +4,30 @@
 Plus Vending offre vendita, riparazione e assistenza distributori automatici in Campania. Servizi H24 per negozi, uffici e attività commerciali.
 
 ## Services
-- Vendita distributori automatici
-- Riparazione e manutenzione
-- Progettazione negozi H24
+- Vendita distributori automatici (snack, bevande, caffè, carne/frozen, gelati, giochi)
+- Riparazione e manutenzione (anche su distributori di altri fornitori)
+- Progettazione e allestimento negozi H24 chiavi in mano
 - Consulenza tecnica
 - Assistenza 24/7
 
 ## Location
-Napoli, Campania, Italia
+- Sede: Via Alfonso Albanese, 43 — 84010 S.Egidio del Monte Albino (SA), Italia
+- Area servita: Campania e province limitrofe
 
 ## Contact
-- Telefono: +390810000000
-- Email: info@plusvending.it
-- Servizio: Campania
+- Telefono: +39 081 353 5325
+- Email: amministrazione@plusvending.it
+- Sito: https://plusvending.it
+
+## Pages
+- https://plusvending.it/ — Homepage con panoramica servizi e funnel contatti
+- https://plusvending.it/distributori — Catalogo distributori per categoria (snack, caffè, frozen, gelati, giochi)
+- https://plusvending.it/negozi-h24 — Progettazione e casi studio negozi automatici H24
+- https://plusvending.it/privacy — Informativa privacy ex GDPR
 
 ## Business Info
+- Ragione sociale: Plus Vending s.r.l.s
+- P.IVA: 05764060652
 - Tipo: LocalBusiness, VendingMachineBusiness
 - Area servita: Campania
 - Fascia prezzo: €€
