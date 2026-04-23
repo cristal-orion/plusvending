@@ -299,12 +299,69 @@ const funnelOptions = [
     try {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
 
+      // Raccogli dati del form PRIMA del reset per inviarli a Klaviyo
+      const fd = new FormData(form);
+      const klaviyoEmail = (fd.get('email') ?? '').toString();
+      const klaviyoNome = (fd.get('nome') ?? '').toString().trim();
+      const klaviyoCognome = (fd.get('cognome') ?? '').toString().trim();
+      const rawPhone = (fd.get('telefono') ?? '').toString();
+      const klaviyoRegione = (fd.get('regione') ?? '').toString();
+      const klaviyoMessaggio = (fd.get('messaggio') ?? '').toString();
+
+      // Normalizza telefono in formato E.164 richiesto da Klaviyo.
+      // Aggiunge +39 se manca il prefisso internazionale.
+      const cleaned = rawPhone.replace(/[\s\-().]/g, '');
+      let klaviyoPhone: string | null = null;
+      if (cleaned) {
+        if (cleaned.startsWith('+')) klaviyoPhone = cleaned;
+        else if (cleaned.startsWith('00')) klaviyoPhone = '+' + cleaned.slice(2);
+        else klaviyoPhone = '+39' + cleaned;
+      }
+
       status.textContent = 'Richiesta inviata con successo! Ti ricontatteremo presto.';
       status.className = 'text-center text-sm text-green-400 mt-2';
       form.reset();
       // Re-check first funnel option after reset
       const firstRadio = form.querySelector<HTMLInputElement>('input[name="funnel"]');
       if (firstRadio) firstRadio.checked = true;
+
+      // Invio profilo a Klaviyo (fire-and-forget — non blocca la UX)
+      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=RWRtDs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'revision': '2024-10-15',
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'subscription',
+            attributes: {
+              profile: {
+                data: {
+                  type: 'profile',
+                  attributes: {
+                    email: klaviyoEmail,
+                    first_name: klaviyoNome,
+                    last_name: klaviyoCognome,
+                    phone_number: klaviyoPhone,
+                    properties: {
+                      'Regione': klaviyoRegione,
+                      'Messaggio': klaviyoMessaggio,
+                      'Sorgente': 'Landing Plus Vending - Richiedi Info',
+                      'Data richiesta': new Date().toISOString(),
+                    },
+                  },
+                },
+              },
+            },
+            relationships: {
+              list: {
+                data: { type: 'list', id: 'WWzu7E' },
+              },
+            },
+          },
+        }),
+      }).catch((err) => console.error('Errore invio Klaviyo:', err));
     } catch {
       status.textContent = 'Si è verificato un errore. Riprova o contattaci direttamente.';
       status.className = 'text-center text-sm text-red-400 mt-2';
