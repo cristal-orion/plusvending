@@ -398,9 +398,13 @@
     } catch { return null; }
   }
 
-  function gtag(...args: unknown[]) {
-    (window as unknown as { dataLayer: unknown[] }).dataLayer = (window as unknown as { dataLayer: unknown[] }).dataLayer || [];
-    (window as unknown as { dataLayer: unknown[] }).dataLayer.push(args);
+  function gtag(..._args: unknown[]) {
+    const w = window as unknown as { dataLayer: IArguments[] };
+    w.dataLayer = w.dataLayer || [];
+    // IMPORTANT: push `arguments` (not the rest array) — GTM recognizes
+    // Arguments as a gtag API command, plain Arrays are treated as events.
+    // eslint-disable-next-line prefer-rest-params
+    w.dataLayer.push(arguments);
   }
 
   function applyConsent(choices: Choices) {
