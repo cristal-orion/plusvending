@@ -297,9 +297,7 @@ const funnelOptions = [
     submitBtn.disabled = true;
 
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
-
-      // Raccogli dati del form PRIMA del reset per inviarli a Klaviyo
+      // Raccogli dati del form PRIMA dell'invio per Klaviyo
       const fd = new FormData(form);
       const klaviyoEmail = (fd.get('email') ?? '').toString();
       const klaviyoNome = (fd.get('nome') ?? '').toString().trim();
@@ -318,16 +316,12 @@ const funnelOptions = [
         else klaviyoPhone = '+39' + cleaned;
       }
 
-      status.textContent = 'Richiesta inviata con successo! Ti ricontatteremo presto.';
-      status.className = 'text-center text-sm text-green-400 mt-2';
-      form.reset();
-      // Re-check first funnel option after reset
-      const firstRadio = form.querySelector<HTMLInputElement>('input[name="funnel"]');
-      if (firstRadio) firstRadio.checked = true;
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
 
-      // Invio profilo a Klaviyo (fire-and-forget — non blocca la UX)
+      // Invio profilo a Klaviyo con keepalive per sopravvivere al redirect
       fetch('https://a.klaviyo.com/client/subscriptions/?company_id=RWRtDs', {
         method: 'POST',
+        keepalive: true,
         headers: {
           'Content-Type': 'application/json',
           'revision': '2024-10-15',
@@ -362,10 +356,12 @@ const funnelOptions = [
           },
         }),
       }).catch((err) => console.error('Errore invio Klaviyo:', err));
+
+      window.location.href = '/grazie';
     } catch {
       status.textContent = 'Si è verificato un errore. Riprova o contattaci direttamente.';
       status.className = 'text-center text-sm text-red-400 mt-2';
-    } finally {
+      status.classList.remove('hidden');
       submitText.textContent = 'Invia Richiesta';
       submitBtn.disabled = false;
     }

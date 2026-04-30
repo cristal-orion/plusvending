@@ -1,0 +1,244 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Richiesta ricevuta',
+    text: 'Abbiamo già la tua richiesta nella nostra casella. Ti abbiamo inviato un\'email di conferma.',
+  },
+  {
+    num: '02',
+    title: 'Analisi del progetto',
+    text: 'Il nostro team studia la tua esigenza e prepara una proposta su misura per la tua attività.',
+  },
+  {
+    num: '03',
+    title: 'Ti ricontattiamo entro 24 ore',
+    text: 'Ti chiamiamo o scriviamo per concordare un sopralluogo o un primo incontro conoscitivo.',
+  },
+];
+---
+
+<Layout
+  title="Grazie per averci contattato — Plus Vending"
+  description="La tua richiesta è stata inviata. Ti ricontatteremo entro 24 ore."
+  noindex={true}
+>
+  <Header />
+
+  <main>
+    <!-- ══ HERO ══ -->
+    <section class="relative min-h-[88vh] flex items-center overflow-hidden pt-32 pb-24">
+      <!-- Background -->
+      <div class="absolute inset-0 bg-bg">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse 70% 60% at 50% 35%, rgba(245,166,35,0.10) 0%, transparent 70%);"></div>
+        <div class="absolute inset-0 opacity-[0.025]" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(245,166,35,0.4) 80px, rgba(245,166,35,0.4) 81px), repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(245,166,35,0.4) 80px, rgba(245,166,35,0.4) 81px);"></div>
+      </div>
+
+      <!-- Floating orbs -->
+      <div class="absolute top-32 right-[12%] w-80 h-80 rounded-full bg-accent/[0.06] blur-[100px]"></div>
+      <div class="absolute bottom-32 left-[10%] w-64 h-64 rounded-full bg-accent/[0.05] blur-[80px]"></div>
+
+      <div class="relative z-10 max-w-3xl mx-auto px-6 w-full text-center">
+        <!-- Check icon -->
+        <div class="inline-flex items-center justify-center mb-10 animate-fade-up" style="animation-delay:0.05s">
+          <div class="check-ring">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="check-icon">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+        </div>
+
+        <p class="text-[11px] font-body font-semibold tracking-[0.25em] uppercase text-accent mb-5 animate-fade-up" style="animation-delay:0.15s">
+          Richiesta ricevuta
+        </p>
+
+        <h1 class="font-display font-extrabold text-5xl md:text-[5.2rem] leading-[1.02] tracking-tight text-text mb-6 animate-fade-up" style="animation-delay:0.25s">
+          Grazie<span class="text-accent">.</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-text-muted max-w-xl mx-auto leading-relaxed mb-10 animate-fade-up" style="animation-delay:0.4s">
+          Abbiamo ricevuto la tua richiesta. Un nostro consulente ti ricontatterà <strong class="text-text">entro 24 ore lavorative</strong> per discutere insieme la soluzione più adatta al tuo progetto.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center items-center animate-fade-up" style="animation-delay:0.55s">
+          <a
+            href="/"
+            class="cta-primary inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-accent text-bg font-body font-semibold text-sm rounded-lg transition-all duration-300 hover:shadow-[0_0_32px_rgba(245,166,35,0.3)]"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Torna alla home
+          </a>
+          <a
+            href="/distributori"
+            class="cta-ghost inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/15 text-text font-body font-semibold text-sm rounded-lg transition-all duration-300 hover:border-accent hover:text-accent"
+          >
+            Scopri i distributori
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ NEXT STEPS ══ -->
+    <section class="relative py-24 md:py-32 bg-surface/50 border-t border-white/[0.04]">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-16" data-reveal>
+          <p class="text-[11px] font-body font-semibold tracking-[0.25em] uppercase text-accent mb-4">I prossimi passi</p>
+          <h2 class="font-display font-bold text-3xl md:text-5xl leading-[1.05] tracking-tight text-text">
+            Cosa succede <span class="text-accent">ora</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 md:gap-5">
+          {steps.map((s, i) => (
+            <div class="step-card" data-reveal={`delay-${i + 1}`}>
+              <div class="step-num font-display">{s.num}</div>
+              <h3 class="font-display font-bold text-xl text-text mb-3 mt-6 leading-tight">{s.title}</h3>
+              <p class="text-text-muted text-[15px] leading-relaxed">{s.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ DIRECT CONTACTS ══ -->
+    <section class="relative py-20 md:py-24">
+      <div class="max-w-3xl mx-auto px-6 text-center" data-reveal>
+        <p class="text-text-muted mb-8 text-[15px]">
+          Hai bisogno di parlarci subito? Contattaci direttamente:
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-10">
+          <a href="tel:+390813535325" class="contact-link group">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>+39 081 353 53 25</span>
+          </a>
+          <a href="mailto:amministrazione@plusvending.it" class="contact-link group">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>amministrazione@plusvending.it</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .check-ring {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.18) 0%, rgba(245, 166, 35, 0.04) 100%);
+    border: 1.5px solid rgba(245, 166, 35, 0.35);
+    color: #F5A623;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 60px rgba(245, 166, 35, 0.15);
+  }
+
+  .check-ring::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 166, 35, 0.15);
+    animation: pulse-ring 2.4s ease-out infinite;
+  }
+
+  .check-icon {
+    animation: check-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+  }
+
+  @keyframes check-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes pulse-ring {
+    0%   { transform: scale(1);    opacity: 0.7; }
+    100% { transform: scale(1.18); opacity: 0; }
+  }
+
+  .step-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1.25rem;
+    padding: 2rem 1.75rem;
+    transition: border-color 0.4s, transform 0.4s, background-color 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-card:hover {
+    border-color: rgba(245, 166, 35, 0.25);
+    background: rgba(255, 255, 255, 0.025);
+    transform: translateY(-3px);
+  }
+
+  .step-num {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(180deg, #F5A623 0%, rgba(245, 166, 35, 0.2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.02em;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    color: rgba(240, 239, 232, 0.75);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+  }
+
+  .contact-link:hover {
+    color: #F5A623;
+  }
+
+  .contact-link svg {
+    color: #F5A623;
+    flex-shrink: 0;
+  }
+
+  .cta-primary {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cta-primary:hover::before {
+    transform: translateX(100%);
+  }
+</style>
