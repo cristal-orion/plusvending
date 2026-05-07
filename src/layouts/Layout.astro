@@ -1,5 +1,6 @@
 ---
 import CookieBanner from '../components/CookieBanner.astro';
+import WhatsAppFab from '../components/WhatsAppFab.astro';
 
 interface Props {
   title?: string;
@@ -121,6 +122,8 @@ const {
     </div>
     
     <slot />
+
+    <WhatsAppFab />
 
     <CookieBanner />
 

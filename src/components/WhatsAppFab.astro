@@ -1,0 +1,134 @@
+---
+const phone = '393931281083';
+const message = 'Ciao, vorrei informazioni sui distributori automatici Plus Vending.';
+const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Scrivici su WhatsApp"
+  class="whatsapp-fab"
+  data-whatsapp-fab
+>
+  <span class="whatsapp-fab__pulse" aria-hidden="true"></span>
+  <svg class="whatsapp-fab__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path
+      d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a12.062 12.062 0 0 0 5.71 1.447h.005c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.479-8.45zM12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.975 1.005-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.27c0-5.45 4.456-9.882 9.881-9.882 2.638 0 5.118 1.027 6.984 2.892a9.825 9.825 0 0 1 2.892 6.99c0 5.45-4.456 9.881-9.881 9.881zm5.422-7.403c-.297-.149-1.758-.867-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.148-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.298.298-.496.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.521.074-.793.372-.273.297-1.04 1.016-1.04 2.479 0 1.461 1.064 2.875 1.213 3.073.149.198 2.094 3.2 5.077 4.487.71.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413-.074-.123-.272-.198-.57-.347z"
+      fill="currentColor"
+    />
+  </svg>
+</a>
+
+<style>
+  .whatsapp-fab {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #25d366 0%, #1ebe57 100%);
+    color: #fff;
+    text-decoration: none;
+    box-shadow:
+      0 10px 30px -10px rgba(37, 211, 102, 0.55),
+      0 4px 14px -4px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(8px);
+    opacity: 0;
+    animation: whatsappFabIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease,
+      bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .whatsapp-fab:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+      0 16px 40px -10px rgba(37, 211, 102, 0.7),
+      0 6px 18px -4px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .whatsapp-fab:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  .whatsapp-fab__icon {
+    display: block;
+    color: #fff;
+  }
+
+  .whatsapp-fab__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: rgba(37, 211, 102, 0.55);
+    z-index: -1;
+    animation: whatsappPulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+
+  /* When cookie banner is open, lift the FAB above it */
+  body:has(#cookie-banner:not([hidden])) .whatsapp-fab {
+    bottom: 200px;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .whatsapp-fab {
+      right: 16px;
+      bottom: 16px;
+      width: 52px;
+      height: 52px;
+    }
+    body:has(#cookie-banner:not([hidden])) .whatsapp-fab {
+      bottom: 240px;
+    }
+  }
+
+  @keyframes whatsappFabIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes whatsappPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    70% {
+      transform: scale(1.25);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.25);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-fab {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .whatsapp-fab__pulse {
+      animation: none;
+      display: none;
+    }
+  }
+</style>
