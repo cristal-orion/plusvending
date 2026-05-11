@@ -318,6 +318,32 @@ const funnelOptions = [
 
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
 
+      // Mappa lo slug del funnel sull'etichetta leggibile per il foglio Google
+      const funnelLabels: Record<string, string> = {
+        'negozio-h24': 'Negozio H24',
+        'acquisto-distributore': 'Acquisto Distributore',
+        'riparazione-assistenza': 'Riparazione e Assistenza',
+      };
+      const funnelSlug = (fd.get('funnel') ?? '').toString();
+      const funnelLabel = funnelLabels[funnelSlug] ?? funnelSlug;
+
+      // Invio lead a Google Sheets via Apps Script (foglio "Contatti Sito")
+      // Content-Type text/plain per evitare il preflight CORS (Apps Script non gestisce OPTIONS)
+      fetch('https://script.google.com/macros/s/AKfycbyNhqdF8OX6d4TR6rS-kAqFJBnAtQXFHtmFKC2hrc9QZLlpgk19gBOAoD6BSoKHRlk/exec', {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          funnel: funnelLabel,
+          nome: klaviyoNome,
+          cognome: klaviyoCognome,
+          email: klaviyoEmail,
+          telefono: rawPhone,
+          regione: klaviyoRegione,
+          messaggio: klaviyoMessaggio,
+        }),
+      }).catch((err) => console.error('Errore invio Google Sheets:', err));
+
       // Invio profilo a Klaviyo con keepalive per sopravvivere al redirect
       fetch('https://a.klaviyo.com/client/subscriptions/?company_id=RWRtDs', {
         method: 'POST',
