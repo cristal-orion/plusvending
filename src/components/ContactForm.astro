@@ -329,9 +329,8 @@ const funnelOptions = [
 
       // Invio lead a Google Sheets via Apps Script (foglio "Contatti Sito")
       // Content-Type text/plain per evitare il preflight CORS (Apps Script non gestisce OPTIONS)
-      fetch('https://script.google.com/macros/s/AKfycbzk2_5ldyGLwzUU2eXFsB-BUVxhXjeN86CdTu3XFl3Tu4Q1Yl-yRC7rFndbt1MZmKVH/exec', {
+      const sheetsReq = fetch('https://script.google.com/macros/s/AKfycbzk2_5ldyGLwzUU2eXFsB-BUVxhXjeN86CdTu3XFl3Tu4Q1Yl-yRC7rFndbt1MZmKVH/exec', {
         method: 'POST',
-        keepalive: true,
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           funnel: funnelLabel,
@@ -344,10 +343,9 @@ const funnelOptions = [
         }),
       }).catch((err) => console.error('Errore invio Google Sheets:', err));
 
-      // Invio profilo a Klaviyo con keepalive per sopravvivere al redirect
-      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=RWRtDs', {
+      // Invio profilo a Klaviyo
+      const klaviyoReq = fetch('https://a.klaviyo.com/client/subscriptions/?company_id=RWRtDs', {
         method: 'POST',
-        keepalive: true,
         headers: {
           'Content-Type': 'application/json',
           'revision': '2024-10-15',
@@ -382,6 +380,12 @@ const funnelOptions = [
           },
         }),
       }).catch((err) => console.error('Errore invio Klaviyo:', err));
+
+      // Aspetta che le richieste partano e completino PRIMA di cambiare pagina:
+      // il redirect immediato altrimenti tronca le chiamate (causa dei lead persi).
+      // Timeout di sicurezza a 6s così il bottone non resta mai bloccato.
+      const timeoutRedirect = new Promise((resolve) => setTimeout(resolve, 6000));
+      await Promise.race([Promise.allSettled([sheetsReq, klaviyoReq]), timeoutRedirect]);
 
       window.location.href = '/grazie';
     } catch {
