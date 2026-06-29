@@ -19,4 +19,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://plusvending.it/sitemap.xml
+Sitemap: https://plusvending.it/sitemap-index.xml
